@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    
+    <div class="container" style="position: relative; display: inline-block; height:100%; width:100%">
+        <h1 class="title">All Expire Events Of All Users</h1>
+        <div class="row">  
+        
+            {% for obj in event_page %}
+              
+                <div class="column is-6">
+                    <div class="card card-link">
+                        
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                <p class="title is-4">Event ID: {{ obj.id }}</p>
+                                <p class="title is-4">Event Owner: {{ obj.user.username }}</p>
+                                <p class="title is-4">Event Title : {{ obj.title }}</p>
+                                <p class="title is-4">Event Date : {{ obj.eventdate }}</p>
+                                <p class="title is-4">Event Participants : 
+                                    {% for c in count %}
+                                        {% if c.event == obj.id %}   
+                                            {{ c.ncount }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                            </div> 
+                        </div>
+
+                        <footer class="card-footer">
+                            <a class="card-footer-item button is-dark" href="{% url 'events:create_event' %}">Add New Event</a>
+                            &nbsp;&nbsp;
+                            {% if obj.user.id == request.user.id  %}
+                                <a class="button is-info" href="{% url 'events:edit_event' obj.id %}">
+                                    Edit Event</a>&nbsp;&nbsp;
+                            {% else %}
+                            {% endif %}
+                                
+                        </footer>
+                        
+                    </div>
+                </div> <br>
+                {% endfor %}
+
+        </div>
+    </div>
+    
+
+{% endblock %}

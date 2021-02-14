@@ -1,0 +1,98 @@
+{% load static %}
+{% load i18n %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/">KMASTORE </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">
+                        {% trans 'Dashboard' %}</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" class="navbar-item">{% trans "Add New Product" %}</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" class="navbar-item">
+                        {% trans "Active Products" %}</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" class="navbar-item">
+                        {% trans "Out Of Stock" %}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% trans 'Stock' %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userMenu">
+                    <a class="dropdown-item" href="{% url 'stocks:add_stock' %}">{% trans 'Add New Stock' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                        {% trans 'Edit Stock' %}</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home:tools' %}" class="navbar-item">
+                        {% trans "Tools" %}</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% trans 'Wellcome' %}: {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userMenu">
+                    <a class="dropdown-item" href="#{% url 'account_change_password' %}">
+                        {% trans 'Change password' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'account_logout' %}" style="color: red;">
+                        {% trans 'Log out' %}</a>
+                    </div>
+                </li>
+                <!-- <li class="nav-item active">
+                    <a class="nav-link button is-danger" href="{% url 'account_logout' %}" class="navbar-item">
+                        Logout</a>
+                </li> -->
+            </ul>
+        {% else %}
+            <form class="form-inline ml-auto">
+            <a href="{% url 'account_login' %}" class="button  is-info">{% trans 'Log in' %}</a>&nbsp;&nbsp;
+            <a href="{% url 'account_signup' %}" class="button is-secondary">{% trans 'Sign up' %}</a>
+            </form>
+
+        {% endif %}
+        
+        {% if user.is_authenticated %}    
+        <ul class="navbar-nav ml-auto">
+            <form action="{% url 'change_language' %}" method="post" id="lang">
+                {% csrf_token %}
+                <select name="language" class="form-control" form="lang" onchange="form.submit()" id="myDropdown">   
+                    <option selected value="">{% trans 'Choose Language' %}</option>       
+                    {% get_available_languages as LANGUAGES %}
+                    {% for language in LANGUAGES %}
+                    <option value="{{ language.0 }}" {% if language.0 == LANGUAGE_CODE %} selected {% endif %}>
+                        {{ language.0|language_name_local }} 
+                        ({{ language.0 }})
+                    </option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" value="Change">
+            </form>
+        </ul>
+        {% endif %}
+    </div>
+  </nav>
+
+{% block scripts %}
+  <script>
+    // var x = document.getElementById("myDropdown");
+    // x.selectedIndex = -1;
+    // document.getElementById("myDropdown").selectedIndex = -1;
+    // document.getElementsByName("language").selectedIndex = -1;
+  </script>
+{% endblock %}

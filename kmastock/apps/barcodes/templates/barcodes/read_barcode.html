@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+
+{% block content %}
+<!-- {{ code }} -->
+<form class="form-inline mt-2 mt-md-0" method="GET" action="{% url 'barcodes:read_barcode' %}">
+
+    <input class="form-control mr-sm-2" type="text" name='reader' value="{{request.GET.reader}}"  placeholder="write barcode path" aria-label="Search">
+
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Load Path</button>
+</form>
+<br>
+<br>
+
+<input class="form-control mr-sm-2" type="text" name='barcode' value='{{ code }}'  placeholder="barcode will appear here...." aria-label="Search">
+<br>
+<!-- {{ code }} -->
+
+
+{% endblock  %}

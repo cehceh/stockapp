@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+<div class="container" style="position: relative; display: inline-block; height:100%; width:100%" id="dashboard">
+    <h1 class="title">Dashboard</h1>
+    <div class="row">  
+
+        <!-- first card -->
+        <div class="column is-6">
+            <div class="card card-link">
+                
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <img :src="image">
+                            <p class="title is-4"><a href="#">
+                                Display Your Attended Events</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        
+                    </div> 
+                </div>
+
+                <footer class="card-footer">
+                    <a class="button is-dark card-footer-item" href="#">
+                        Add New Event</a>&nbsp;&nbsp;
+                    <a href="#" class="card-footer-item button is-primary">
+                            Display Your created Events</a>
+                </footer>
+                
+            </div>
+        </div> <br>
+
+        <!-- second card -->
+        <div class="column is-6">
+            <div class="card card-link">
+                
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <img :src="image">
+                            <p class="title is-4"><a href="#">
+                                Display Attended Events Of All Users</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        
+                    </div> 
+                </div>
+
+                <footer class="card-footer">
+                    <a class="button is-dark card-footer-item" href="#">
+                        Add New Event</a>&nbsp;&nbsp;
+                    <a class="card-footer-item button is-danger" href="#">
+                        Your Expire Event</a>&nbsp;&nbsp;
+                    <a href="#" class="card-footer-item button is-primary">
+                        Join Active Events</a>
+                </footer>
+                
+            </div>
+        </div> <br>
+
+        <!-- third card  -->
+        <div class="column is-6">
+            <div class="card card-link">
+                
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <img :src="image">
+                            <p class="title is-4">
+                                <a href="#">
+                                Display Your Withdraw Events</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                    </div> 
+                </div>
+
+                <footer class="card-footer">
+                    <!-- <a class="button is-dark" href="#">
+                        Add New Event
+                    </a> &nbsp;&nbsp; -->
+                    <a class="card-footer-item button is-info" href="#">
+                        Edit Your Events
+                    </a>&nbsp;&nbsp;   
+                    <a href="#" class="card-footer-item button is-danger">
+                        Display All Expire Events
+                    </a>
+                </footer>
+                
+            </div>
+        </div> <br>
+
+        <div class="column is-6">
+            <div class="card card-link">
+                
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <img :src="image">
+                            <p class="title is-4"><a href="#">
+                                Display Your Deleted Events</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        
+                    </div> 
+                </div>
+
+                <footer class="card-footer">
+                    <!-- <a href="#" class="card-footer-item button is-info">
+                        Edit Events</a>&nbsp;&nbsp; -->
+                    <a href="#" class="card-footer-item button is-primary">
+                        Reutrn Your Deleted Event</a> &nbsp;&nbsp;
+                    <a class="card-footer-item button is-danger" href="#">
+                        Your Expire Event</a>
+                </footer>
+                
+            </div>
+        </div> <br>
+
+            
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+     <!-- scripts for VUE -->
+     <script src="{% static 'vue/vue.js' %}"></script>
+     <script src="https://cdnjs.cloudfare.com/ajax/libs/axios/0.19.2/axios.min.js">
+     </script>
+
+    <script>
+        
+        var vue = new Vue ({
+            el: '#dashboard',
+            delimiters: ['[', ']'],
+            data: {
+                image: "{% static 'img/2.png' %}",
+            },
+        });
+
+    </script>
+
+
+{% endblock %}

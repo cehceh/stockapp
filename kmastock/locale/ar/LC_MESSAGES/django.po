@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-12 16:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\kmastock\settings\development.py:215
+msgid "Arabic"
+msgstr "ar"
+
+#: .\kmastock\settings\development.py:216
+msgid "English"
+msgstr "en"
+
+#: .\kmastock\settings\development.py:217
+msgid "German"
+msgstr "de"
+
+#: .\kmastock\urls.py:37
+msgid "admin/"
+msgstr ""
+
+#: .\templates\account\logout.html:5 .\templates\base\navbar.html:42
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+#: .\templates\account\logout.html:9 .\templates\account\logout.html:16
+msgid "Sign Out"
+msgstr "تسجيل الخروج"
+
+#: .\templates\account\logout.html:11
+msgid "Are you sure you want to sign out?"
+msgstr "هل تريد تسجيل الخروج؟"
+
+#: .\templates\base\navbar.html:14
+msgid "Dashboard"
+msgstr "لوحة التحكم "
+
+#: .\templates\base\navbar.html:17
+msgid "Add New Product"
+msgstr "أضف منتج جديد"
+
+#: .\templates\base\navbar.html:21
+msgid "Active Products"
+msgstr "المنتحات المتاحة"
+
+#: .\templates\base\navbar.html:25
+msgid "Out Of Stock"
+msgstr "النواقص"
+
+#: .\templates\base\navbar.html:29
+msgid "Your Created Products"
+msgstr "المنتحات المضافة"
+
+#: .\templates\base\navbar.html:35
+msgid "Wellcome"
+msgstr "مرحبا"
+
+#: .\templates\base\navbar.html:39
+msgid "Change password"
+msgstr "تغيير كلمة المرور"
+
+#: .\templates\base\navbar.html:52
+msgid "Log in"
+msgstr "الدخول"
+
+#: .\templates\base\navbar.html:53 .\templates\home\frontpage.html:19
+msgid "Sign up"
+msgstr " انشاء حساب جديد "
+
+#: .\templates\base\navbar.html:63
+msgid "Choose Language"
+msgstr "اختر لغة"
+
+#: .\templates\base\search_bar.html:13
+msgid "find product by id"
+msgstr "البحث عن المنتج برقمه"
+
+#: .\templates\base\search_bar.html:14
+msgid "find product by barcode"
+msgstr "البحث عن المنتج بالباركود"
+
+#: .\templates\home\frontpage.html:10
+msgid "Wellcome To Our Store Application"
+msgstr "أهلا بك فى متجرنا"
+
+#: .\templates\home\frontpage.html:13
+msgid "We are happy to be with us"
+msgstr "سعداء بوجودك معنا هنا"
+
+#: .\templates\home\frontpage.html:14
+msgid "Goto Your Dashboard"
+msgstr "أذهب الى لوحة التحكم الخاصة بك يا "
+
+#: .\templates\home\frontpage.html:18
+msgid "We will be happy if you join Our Store, Try to"
+msgstr "سنكون سعداء لو التحقت بنا جرب  "
+
+#: .\templates\home\frontpage.html:19
+msgid "now"
+msgstr "الان"

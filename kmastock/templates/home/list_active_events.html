@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    
+    <div class="container" style="position: relative; display: inline-block; height:100%; width:100%">
+        <h1 class="title">All Available Events Of All Users</h1>
+        <div class="row">  
+        
+            {% for obj in event_page %}
+              
+                <div class="column is-6">
+                    <div class="card card-link">
+                        
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                <p class="title is-4">Event ID: {{ obj.id }}</p>
+                                <p class="title is-4">Event Owner: {{ obj.user.username }}</p>
+                                <p class="title is-4">Event Title : {{ obj.title }}</p>
+                                <p class="title is-4">Event Date : {{ obj.eventdate }}</p>
+                                <p class="title is-4">Participants : 
+                                    {% for c in count %}
+                                        {% if c.event == obj.id %}   
+                                            {{ c.ncount }} <br>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <!-- This loop for give a hint to user if he attended the event or not -->
+                                {% for i in user_attend %}
+                                    {% if i.event == obj.id %}
+                                        {% if i.attended %}   
+                                            <p style="background-color: lightgreen;width: 15%;">
+                                                <small> You Joined</small>
+                                            </p>&nbsp;&nbsp;
+                                        {% elif not i.attended %}
+                                            <p style="background-color: lightpink;width: 20%;">
+                                                <small> You Withdrawn</small>
+                                            </p>&nbsp;&nbsp;
+                                        {% else %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}  
+                                    
+                            </div> 
+                        </div>
+
+                        <footer class="card-footer">
+                            <a class="button is-dark" href="{% url 'events:create_event' %}" class="card-footer-item">
+                                Create New Event
+                            </a>&nbsp;&nbsp;
+                            {% if obj.user.id == request.user.id  %}
+                                
+                                <a class="button is-info" href="{% url 'events:edit_event' obj.id %}">
+                                    Edit Event</a>&nbsp;&nbsp;
+                                <!-- <a class="button is-danger" href="{% url 'events:withdraw_specific_event' obj.id user.id %}">
+                                    Withdraw</a> &nbsp;&nbsp; -->
+                            {% else %}
+                            {% endif %}
+                            
+                            <a class="button is-primary" href="{% url 'events:join_specific_event' obj.id user.id %}">
+                                Join 
+                            </a>&nbsp;&nbsp; 
+                            <a class="button is-danger" href="{% url 'events:withdraw_specific_event' obj.id user.id %}" >
+                                Withdraw
+                            </a> &nbsp;&nbsp;
+                                
+                        </footer>
+                        
+                    </div>
+                </div> <br>
+                {% endfor %}
+
+        </div>
+    </div>
+    
+
+{% endblock %}

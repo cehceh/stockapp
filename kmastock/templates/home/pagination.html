@@ -1,0 +1,92 @@
+<!-- <div class="pagination">
+  <span class="step-links">
+    {% if page.has_previous %}
+      <a href="{{ page.previous_page_number }}" class="btn btn-primary" role="button" id="btn-edit-id">Previous</a>
+    {% endif %}
+    <span class="current">
+      Page {{ page.number }} of {{ page.paginator.num_pages }}.
+    </span>
+    {% if page.has_next %}
+      <a href="?page={{ page.next_page_number }}" class="btn btn-primary" role="button" id="btn-edit-id">Next</a>
+    {% endif %}
+  </span>
+</div> -->
+
+<!--  -->
+<section class="section">
+
+  <div class="pagination center">
+    <span class="step-links">
+        <!-- {% if cl_data.has_previous %}
+            <a href="?page={{ cl_data.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+        Page {{ page.number }} of {{ page.paginator.num_pages }}.
+        </span> {% if cl_data.has_next %}
+    <a href="?page={{ cl_data.next_page_number }}">Next</a> {% endif %} -->
+    {% if event_page %}
+      {% if page.has_other_pages %}
+        <ul class="pagination">
+          {% if page.has_previous %}
+            <li><a class="button is-primary" href="?page={{ page.previous_page_number }}" id="laquo-prev"> &laquo; previous</a></li>
+              <!-- <input type="button" onclick="window.location.href='?page={{ page.previous_page_number }}';" id="laquo-prev" value="&laquo;" /> -->
+          {% else %}
+            <!-- <input type="button" class="disabled" value="&laquo;" /> -->
+            <li class="button is-primary disabled"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in page.paginator.page_range %}
+            {% if page.number == i %}
+              <!-- <input type="button" class="active" value="{{ i }}" /> -->
+              <li class="button is-dark active"> <span>{{ i }} <span class="sr-only" id="current-num">(current)</span></li>
+            {% else %}
+            <!-- <a type="button" href="?page={{ i }}">{{ i }}</a> -->
+              <!-- <input type="button" onclick="window.location.href='?page={{ i }}';" value="{{ i }}" /> -->
+              <li><a class="button is-primary" type="button" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if page.has_next %}
+            <!-- <input type="button" onclick="window.location.href='?page={{ page.next_page_number }}';" value="&raquo;" /> -->
+            <li> <a class="button is-primary" type="button" href="?page={{ page.next_page_number }}">next &raquo; </a></li>
+          {% else %}
+            <!-- <input type="button" class="disabled" value="&raquo;" /> -->
+            <li class="button is-primary disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+      {% endif %}
+
+    {% else %}
+
+      {% if page.has_other_pages %}
+        <ul class="pagination">
+          {% if page.has_previous %}
+              <!-- <input type="button" href="?page={{ page.previous_page_number }}" value="&laquo;" /> -->
+            <li> <a type="button" href="?page={{ page.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <!-- <input type="button" class="disabled" value="&laquo;"/> -->
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+
+          {% for i in page.paginator.page_range %}
+              {% if page.number == i %}
+                <!-- <input type="button" class="active" value="{{ i }}" /> -->
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></li>
+              {% else %}
+                  <!-- <input type="button" href="?page={{ i }}" value="{{ i }}" /> -->
+                <li> <a type="button" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %} 
+          {% endfor %}
+
+          {% if page.has_next %}
+              <!-- <input type="button" href="?page={{ page.next_page_number }}" value="&raquo;" /> -->
+            <li> <a type="button" href="?page={{ page.next_page_number }}">&raquo;</a></li>
+          {% else %}
+              <!-- <input type="button" class="disabled" value="&raquo;" /> -->
+            <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+        {% endif %}
+    {% endif %}
+        </span>
+  </div>
+
+</section>

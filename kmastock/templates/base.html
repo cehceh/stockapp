@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+        <title>Events Application</title>
+
+        {% include "base/css.html" %}
+       
+    </head>
+    <body>
+
+        {% if request.path == '/tools/' %}
+            {% include "base/tools_navbar.html" with brand_name=KMAStore %}
+        {% else %}
+            {% include "base/navbar.html" with brand_name=KMAStore %}
+        {% endif %}    
+        
+        <div class="container">
+            <!--  -->       
+            {% include "base/search_bar.html" %}
+            
+            <!--  -->
+            {% include "base/messages.html" %}
+            
+
+            {% block content %}
+            {% endblock %}
+            
+        </div>
+
+        {% include "home/pagination.html" with page=event_page %}
+        <br>
+        <br>
+        <br>
+
+        <!-- <footer class="footer" id="footer-vue">
+            <div class="content has-text-centered">
+                <img :src="image"> <p><strong>Events Project</strong> [ msg ]</p> 
+            </div>
+        </footer> -->
+        <nav class="navbar fixed-bottom navbar-dark bg-dark" id="footer-vue">
+            <a class="navbar-brand" href="/">
+                &copy; [ footerTitle ] {% now ' Y' %}
+            </a>
+            <div class="content-center text-white">
+                <!-- &copy; [ footerTitle ] {% now ' Y' %} -->
+                <!-- <img :src="image"> <p><strong>Events Project</strong> [ msg ]</p>  -->
+            </div>
+        </nav>
+
+        <!--  -->
+        {% include "base/js.html" %}
+        
+
+        {% block scripts %}
+        {% endblock  %}
+
+    </body>
+</html>

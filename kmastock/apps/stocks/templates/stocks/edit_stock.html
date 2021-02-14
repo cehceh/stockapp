@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% load static %} 
+{% load i18n %}
+<!-- {% load render_table from django_tables2 %} -->
+
+{% block content %}
+  
+<div class="container">
+    <h1 class="title">Edit Created Stocks</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="field">
+            <label class="label">{{ form.user.label_tag.hidden }}</label>
+            <div class="control">
+                {{ form.user.hidden }} 
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">{{ form.name.label_tag }}</label>
+            <div class="control">
+                {{ form.name }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">{{ form.description.label_tag }}</label>
+            <div class="control">
+                {{ form.description }}
+            </div>
+        </div>
+        <br>
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-primary">Submit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

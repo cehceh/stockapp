@@ -1,0 +1,21 @@
+{% load i18n %}
+{% url 'account_login' as login %}
+{% url 'account_signup' as signup %}
+
+
+{% if request.path == '/' or request.path == login or request.path == signup  %}
+    
+{% else %}
+    <!-- div for searh events date -->
+    <div class="align-content-center" style="background-color:transparent; height: 100%; width: 100%; margin: 30px;
+    padding: 10px; border-style: outset; border-radius: 20px; border-color: #aab5af; box-shadow: 2px 2px 4px 4px darkgray;" id="search-div" name="mydiv">
+        <form class="form-inline mt-2 mt-md-0" method="GET" action="/">
+            <input class="form-control mr-sm-2" type="text" name='st' placeholder="{% trans 'find product by id' %}" value="{{request.GET.st}}" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" name='bar' placeholder="{% trans 'find product by barcode' %}" value="{{request.GET.bar}}" aria-label="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" hidden>Search</button>
+        </form>
+    </div>
+
+{% endif %}
+
+
