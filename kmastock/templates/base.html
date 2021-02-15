@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -8,50 +9,46 @@
         <title>Events Application</title>
 
         {% include "base/css.html" %}
-       
     </head>
     <body>
 
-        {% if request.path == '/tools/' %}
-            {% include "base/tools_navbar.html" with brand_name=KMAStore %}
-        {% else %}
-            {% include "base/navbar.html" with brand_name=KMAStore %}
-        {% endif %}    
-        
-        <div class="container">
-            <!--  -->       
-            {% include "base/search_bar.html" %}
+        <!-- with icon -->
+        <div class="wrapper d-flex align-items-stretch">
+            <!-- sidebar virtical -->
+            {% include "base/sidebar.html" %}
             
-            <!--  -->
-            {% include "base/messages.html" %}
-            
-
-            {% block content %}
-            {% endblock %}
-            
+            <!-- Page Content -->
+            <div id="content" class="p-4 p-md-5">
+                <!-- navbar horizontal -->
+                {% include "base/navbar.html" %}
+                
+                {% include "base/messages.html" %}
+                
+                {% block content %}
+                {% endblock %}
+                
+            </div>
         </div>
-
+                                  
         {% include "home/pagination.html" with page=event_page %}
+        <!-- <br>
         <br>
-        <br>
-        <br>
-
+        <br> -->
         <!-- <footer class="footer" id="footer-vue">
             <div class="content has-text-centered">
                 <img :src="image"> <p><strong>Events Project</strong> [ msg ]</p> 
             </div>
         </footer> -->
-        <nav class="navbar fixed-bottom navbar-dark bg-dark" id="footer-vue">
+        <!-- <nav class="navbar fixed-bottom navbar-dark bg-dark" id="footer-vue">
             <a class="navbar-brand" href="/">
                 &copy; [ footerTitle ] {% now ' Y' %}
             </a>
             <div class="content-center text-white">
-                <!-- &copy; [ footerTitle ] {% now ' Y' %} -->
-                <!-- <img :src="image"> <p><strong>Events Project</strong> [ msg ]</p>  -->
+                &copy; [ footerTitle ] {% now ' Y' %} 
+                <img :src="image"> <p><strong>Events Project</strong> [ msg ]</p> 
             </div>
-        </nav>
+        </nav> -->
 
-        <!--  -->
         {% include "base/js.html" %}
         
 

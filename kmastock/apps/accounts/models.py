@@ -5,6 +5,7 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     # add additional fields in here
+    is_client = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.email
+        return 'user: {}, email: {}'.format(self.username, self.email)

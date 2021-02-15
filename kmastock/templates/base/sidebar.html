@@ -1,0 +1,117 @@
+{% load i18n %}
+{% load static %}
+
+
+<nav id="sidebar" class="active">
+    <h1><a href="/" class="logo">KMA Store</a></h1>
+    
+    <ul class="list-unstyled components mb-5">
+    {% if user.is_authenticated %}
+        <li class="active">
+            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-user"></span>
+                {% trans 'Wellcome' %}: {{ user.username }}
+            </a>
+            <ul class="collapse list-unstyled" id="userSubmenu">
+                <li>
+                    <a href="/dashboard"><span class="fa fa-home"></span>
+                    {% trans 'Dashboard' %}</a>
+                </li>
+                {% if user.is_staff %}
+                <li>
+                    <a href="#">
+                        <span class="fa fa-cubes"></span>
+                     {% trans 'Created Products' %}</a>
+                </li>
+                <li>
+                    <a href="#"> 
+                        <span class="fas fa-battery-full"></span>
+                         {% trans 'Created Stock' %}</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'account_logout' %}">
+                    <i class="fa fa-sign-out-alt" aria-hidden="true">
+                    </i> {% trans 'Log out' %}</a>
+                </li>
+            </ul>              
+        </li>
+    {% endif %}
+        <li class="active">
+            <a href="#">
+            <span class="fa fa-home"></span> Home</a>
+        </li>
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-cubes"></span>Products</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                <a href="#">
+                    <span class="fa fa-plus-square" aria-hidden="true">
+                    </span>Add Product</a>
+                </li>
+                <li>
+                    <a href="#">Page 2</a>
+                </li>
+                <li>
+                    <a href="#">
+                    <span class="fa fa-battery-empty"></span>
+                    Out Of Stock</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <span class="fa fa-cogs"></span> Services</a>
+        </li>
+        <li>
+            <a href="#stockSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <span class="fa fa-truck"></span>Stock</a>
+            <ul class="collapse list-unstyled" id="stockSubmenu">
+                <li>
+                    <a href="#">
+                        <span class="fa fa-battery-full" aria-hidden="true">
+                        </span>Current Stock</a>
+                </li>
+                <li>
+                    <a href="#">Page 2</a>
+                </li>
+                <li>
+                    <a href="#">Page 3</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><span class="fa fa-paper-plane">
+            </span> Contacts</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li>
+                <form action="{% url 'change_language' %}" method="post" id="lang">
+                    {% csrf_token %}
+                    <select name="language" class="form-control" form="lang" onchange="form.submit()" id="myDropdown">   
+                        <option selected value="">{% trans 'Choose Language' %}</option>       
+                        {% get_available_languages as LANGUAGES %}
+                        {% for language in LANGUAGES %}
+                        <option value="{{ language.0 }}" {% if language.0 == LANGUAGE_CODE %} selected {% endif %}>
+                            {{ language.0|language_name_local }} 
+                            ({{ language.0 }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" value="Change">
+                </form>
+            </li>
+        {% endif %}
+    </ul>
+
+<div class="footer" style="background-color: transparent;">
+    <p>
+        <h6>
+            Copyright &copy;{% now 'Y' %} 
+            All rights reserved | This template is made with
+        </h6>
+    </p>
+</div>
+</nav>
+

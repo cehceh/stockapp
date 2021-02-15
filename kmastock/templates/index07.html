@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -9,16 +10,131 @@
      <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"> -->
 		
 		 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"> -->
     <!-- <link rel="stylesheet" href="css/style.css">  -->
     {% include "base/css.html" %}
 
   </head>
   <body>
-		
-		<div class="wrapper d-flex align-items-stretch">
+    {% include "base/sidebar.html" %}
+	<div class="wrapper d-flex align-items-stretch">
+		<!--<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
+	        <ul class="list-unstyled components mb-5">
+            <li class="active">
+              <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-user"></span>
+              {% trans 'Wellcome' %}: {{ user.username }}
+              </a>
+              <ul class="collapse list-unstyled" id="userSubmenu">
+                <li>
+                  <a href="#"><span class="fa fa-user"></span>
+                    {% trans 'Created Products' %}</a>
+                </li>
+                <li>
+                  <a href="#">{% trans 'Created Stock' %}</a>
+                </li>
+                <li>
+                  <a href="{% url 'account_logout' %}">
+                    <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+                    {% trans 'Log out' %}</a>
+                </li>
+	            </ul>              
+            </li>
+	          <li class="active">
+	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-home"></span> Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+	            </ul>
+	          </li>
+
+	          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-cubes"></span>Products</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                  <a href="#">
+                    <span class="fa fa-plus-square" aria-hidden="true">
+                    </span>Add Product</a>
+                </li>
+                <li>
+                    <a href="#">Page 2</a>
+                </li>
+                <li>
+                    <a href="#">
+                      <span class="fa fa-battery-empty"></span>
+                      Out Of Stock</a>
+                </li>
+              </ul>
+	          </li>
+	          <li>
+              <a href="#">Portfolio</a>
+	          </li>
+	          <li>
+              <a href="#">Contact</a>
+	          </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#page0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-truck"></span>Stock</a>
+              <ul class="collapse list-unstyled" id="page0Submenu">
+                <li>
+                  <a href="#">
+                    <span class="fa fa-battery-full" aria-hidden="true">
+                    </span>Current Stock</a>
+                </li>
+                <li>
+                    <a href="#">Page 2</a>
+                </li>
+                <li>
+                    <a href="#">Page 3</a>
+                </li>
+              </ul>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+              <form action="{% url 'change_language' %}" method="post" id="lang">
+                {% csrf_token %}
+                <select name="language" class="form-control" form="lang" onchange="form.submit()" id="myDropdown">   
+                    <option selected value="">{% trans 'Choose Language' %}</option>       
+                    {% get_available_languages as LANGUAGES %}
+                    {% for language in LANGUAGES %}
+                    <option value="{{ language.0 }}" {% if language.0 == LANGUAGE_CODE %} selected {% endif %}>
+                        {{ language.0|language_name_local }} 
+                        ({{ language.0 }})
+                    </option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" value="Change">
+              </form>
+            </li>
+            {% endif %}
+	      </ul>
+
+        <div class="footer">
+          <p>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This App. is made with <i class="icon-heart" aria-hidden="true"></i> by Eng.Amr Aly</a>
+            </p>
+        </div>
+	    </div>
+    </nav> -->
+
+    <!-- with icon -->
+		<!-- <div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar" class="active">
-				<h1><a href="#index07.html" class="logo">KMASTORE</a></h1>
+				<h1><a href="#index07.html" class="logo">KMA</a></h1>
         <ul class="list-unstyled components mb-5">
           <li class="active">
             <a href="#"><span class="fa fa-home"></span> Home</a>
@@ -42,12 +158,12 @@
 					  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
 					</p>
         </div>
-    	</nav>
+    	</nav> -->
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
           <div class="container-fluid">
 
             <button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -55,33 +171,66 @@
               <span class="sr-only">Toggle Menu</span>
             </button>
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
+                  <i class="fa fa-bars"></i>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Portfolio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+                <ul class="nav navbar-nav ml-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">
+                        <span class="fa fa-home"></span>Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">
+                      <span class="fa fa-shopping-cart"></span>Sales</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Portfolio</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <span class="fa fa-paper-plane"></span>Contact</a>
+                  </li>
+                  <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% trans 'Wellcome' %}: {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userMenu">
+                    <a class="dropdown-item" href="#{% url 'account_change_password' %}">
+                        {% trans 'Change password' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'account_logout' %}" style="color: red;">
+                        {% trans 'Log out' %}</a>
+                    </div>
+                  </li> -->
+                {% if user.is_authenticated %} 
+                <!-- <form action="{% url 'change_language' %}" method="post" id="lang">
+                    {% csrf_token %}
+                    <select name="language" class="form-control" form="lang" onchange="form.submit()" id="myDropdown">   
+                        <option selected value="">{% trans 'Choose Language' %}</option>       
+                        {% get_available_languages as LANGUAGES %}
+                        {% for language in LANGUAGES %}
+                        <option value="{{ language.0 }}" {% if language.0 == LANGUAGE_CODE %} selected {% endif %}>
+                            {{ language.0|language_name_local }} 
+                            ({{ language.0 }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" value="Change">
+                </form> -->
+          
+                {% endif %}
               </ul>
             </div>
           </div>
         </nav>
 
+      
         <h2 class="mb-4">Sidebar #07</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-		</div>
+	  </div>
 
     <!-- <script src="js/jquery07.min.js"></script>
     <script src="js/popper07.js"></script>

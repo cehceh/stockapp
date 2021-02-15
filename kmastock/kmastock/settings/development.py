@@ -146,12 +146,12 @@ DATABASES = {
         # 'HOST': 'localhost',#config('DATABASE_HOST'),
         # 'PORT': '5432',#config('DATABASE_PORT'), #'5432',
         ################################################
-        'ENGINE': config('DATABASE_ENGINE'),
-        'NAME': config('KMADB'),# Name of the database itself
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': config('DATABASE_PORT'), #'5432',
+        'ENGINE': os.environ.get('DATABASE_ENGINE'), #config('DATABASE_ENGINE'),
+        'NAME': os.environ.get('KMADB'),#config('KMADB'),# Name of the database itself
+        'USER': os.environ.get('DATABASE_USER'),# config('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),##config('DATABASE_PASSWORD'),#
+        'HOST': os.environ.get('DATABASE_HOST'),#config('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),#config('DATABASE_PORT'), #'5432',
     }
 }
 
