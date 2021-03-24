@@ -26,7 +26,12 @@
                 <li>
                     <a href="#"> 
                         <span class="fas fa-battery-full"></span>
-                         {% trans 'Created Stock' %}</a>
+                         {% trans 'Created Stores' %}</a>
+                </li>
+                <li>
+                    <a href="#"> 
+                        <span class="fas fa-user-plus"></span>
+                         {% trans 'Created Vendors' %}</a>
                 </li>
                 {% endif %}
                 <li>
@@ -37,53 +42,90 @@
             </ul>              
         </li>
     {% endif %}
-        <li class="active">
+        <!-- <li class="active">
             <a href="#">
             <span class="fa fa-home"></span> Home</a>
-        </li>
+        </li> -->
+    
+    {% if user.is_staff %}  
         <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                <span class="fa fa-cubes"></span>Products</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
+            <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <span class="fa fa-cubes"></span>{% trans 'Products' %}</a>
+            <ul class="collapse list-unstyled" id="productSubmenu">
                 <li>
-                <a href="#">
+                <a href="{% url 'products:add_product' %}">
                     <span class="fa fa-plus-square" aria-hidden="true">
-                    </span>Add Product</a>
+                    </span>{% trans 'Add New Product' %}</a>
                 </li>
                 <li>
-                    <a href="#">Page 2</a>
+                    <a href="#"><span class="fa fa-pen-square" aria-hidden="true">
+                    </span>{% trans 'Edit Product' %}</a>
                 </li>
                 <li>
                     <a href="#">
                     <span class="fa fa-battery-empty"></span>
-                    Out Of Stock</a>
+                    {% trans 'Out Of Stock' %}</a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-cogs"></span> Services</a>
         </li>
         <li>
             <a href="#stockSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-            <span class="fa fa-truck"></span>Stock</a>
+            <span class="fa fa-truck"></span> {% trans 'Stores' %}</a>
             <ul class="collapse list-unstyled" id="stockSubmenu">
                 <li>
-                    <a href="#">
-                        <span class="fa fa-battery-full" aria-hidden="true">
-                        </span>Current Stock</a>
+                    <a href="{% url 'stocks:add_stock' %}">
+                        <span class="fa fa-plus-square" aria-hidden="true">
+                        </span> {% trans 'Add New Store' %}</a>
                 </li>
                 <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
+                    <a href="#"><span class="fa fa-pencil-square-o">
+                    </span>
+                     {% trans 'Edit Store' %} </a>
                 </li>
             </ul>
         </li>
         <li>
+            <a href="#vendorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <span class="fa fa-truck"></span> {% trans 'Vendors' %}</a>
+            <ul class="collapse list-unstyled" id="vendorSubmenu">
+                <li>
+                    <a href="{% url 'vendors:add_vendor' %}">
+                        <span class="fa fa-plus-square" aria-hidden="true">
+                        </span> {% trans 'Add New Vendor' %}</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-pencil-square-o">
+                    </span>
+                     {% trans 'Edit Vendor' %} </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#categorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <span class="fa fa-truck"></span> {% trans 'Ctegories' %}</a>
+            <ul class="collapse list-unstyled" id="categorySubmenu">
+                <li>
+                    <a href="{% url 'category:add_category' %}">
+                        <span class="fa fa-plus-square" aria-hidden="true">
+                        </span> {% trans 'Add New Category' %}</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-pencil-square-o">
+                    </span>
+                     {% trans 'Edit Category' %} </a>
+                </li>
+            </ul>
+        </li>
+    {% endif %}
+        <li>
+            <a href="#">
+                <span class="fa fa-cogs"></span> 
+                {% trans 'Services' %}
+            </a>
+        </li>
+        <li>
             <a href="#"><span class="fa fa-paper-plane">
-            </span> Contacts</a>
+            </span> {% trans 'Contacts' %}</a>
         </li>
         {% if user.is_authenticated %}
             <li>
@@ -109,7 +151,10 @@
     <p>
         <h6>
             Copyright &copy;{% now 'Y' %} 
-            All rights reserved | This template is made with
+            {% trans 'All rights reserved,' %} 
+            {% trans 'This software is made with by Eng. Amr Aly' %}
+            <!-- num1 = {{var}} : {{attr1}} , 
+            num2 = {{num2}} : {{attr2}} -->
         </h6>
     </p>
 </div>

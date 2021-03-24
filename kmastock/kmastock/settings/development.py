@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'jquery',
     'phonenumber_field',
+    'widget_tweaks', 
 
     # My apps
     'apps.accounts',
@@ -215,8 +216,9 @@ LANGUAGES = (
 )
 
 MULTILINGUAL_LANGUAGES = (
-    "en-us",
-    "ar-eg",
+    "en",
+    "ar",
+    'de',
 )
 
 print('DJANGO_ROOT= '+str(DJANGO_ROOT))

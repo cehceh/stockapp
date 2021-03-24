@@ -21,7 +21,7 @@ class ClientQuerySet(models.query.QuerySet):
 
 class ClientManager(models.Manager):
     def get_queryset(self):
-        return CategoriesQuerySet(self.model, using=self._db)
+        return ClientQuerySet(self.model, using=self._db)
 
     def all(self):
         return self.get_queryset().active()
@@ -63,3 +63,5 @@ class Client(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+        

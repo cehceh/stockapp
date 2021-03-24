@@ -39,13 +39,14 @@ class StockManager(models.Manager):
 
 class Stock(models.Model):
     user        = models.ForeignKey('accounts.CustomUser', blank=True, null=True, on_delete=models.CASCADE)
-    name        = models.CharField(max_length=100)
+    name        = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
     timestamp   = models.DateTimeField(auto_now_add=True)
-    updated     = models.DateTimeField(auto_now_add=True)
+    updated     = models.DateTimeField(auto_now=True)
     active      = models.BooleanField(default=True)
     featured    = models.BooleanField(default=False)
-    is_deleted  = models.BooleanField(default=False) # User Library
+    is_deleted  = models.BooleanField(default=False) # 
+    updateduser = models.ForeignKey('accounts.CustomUser', related_name='user_make_stock_changes', blank=True, null=True, on_delete=models.CASCADE)
 
     objects = StockManager()
 

@@ -1,0 +1,77 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+{% load static %} 
+{% load i18n %}
+<!-- {% load render_table from django_tables2 %} -->
+
+{% block content %}
+  
+<div class="container" id="edit-category">
+    <h1 class="title">Edit Category</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <!-- {{ form | crispy }} -->
+        <!-- <div class="field">
+            <label class="label">{{ form.user.label_tag.hidden }}</label>
+            <div class="control">
+                {{ form.user.hidden }} 
+            </div>
+        </div> -->
+
+        <div class="field">
+            <label class="label">{{ form.name.label_tag }}</label>
+            <div class="control">
+                {{ form.name }}
+            </div>
+        </div>
+        
+        <div class="field">
+            <label class="label">{{ form.description.label_tag }}</label>
+            <div class="control">
+                {{ form.description }}
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">{{ form.active.label_tag }}</label>
+            <div class="control">
+                {{ form.active }}
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">{{ form.is_deleted.label_tag }}</label>
+            <div class="control">
+                {{ form.is_deleted }}
+            </div>
+        </div>
+        <br>
+
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-primary">Submit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        var addCategory = new Vue ({
+            el: '#edit-category',
+            delimiters: ['[[', ']]'],
+            data: {
+                active: true,
+
+            },
+            computed: {
+                coloredIftrue: function () {
+                    // this.active = ;
+                }
+            },
+        })
+    </script>
+{% endblock  %}

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from apps.home.views import (frontpage, dashboard, en_frontpage, 
                             ar_frontpage, de_frontpage, tools,
-                            change_language)
+                            change_language, test_)
 
 from django.utils.translation import gettext_lazy as _
 from django.conf.urls.i18n import i18n_patterns 
@@ -27,6 +27,7 @@ urlpatterns = [
     # # frontpage 
     # path('', frontpage, name='frontpage'), # main page means english
     path('change_language', change_language, name='change_language'), # main page means english
+    # path('', test_, name="test"),
 
 ]
 
@@ -53,10 +54,12 @@ urlpatterns += i18n_patterns( # i18n_patterns important to handel languages
     # apps urls
     path('home/', include('apps.home.urls', namespace='home')),
     path('barcodes/', include('apps.barcodes.urls', namespace='barcodes')),
+    path('category/', include('apps.category.urls', namespace='category')),
     path('clients/', include('apps.clients.urls', namespace='clients')),
     path('products/', include('apps.products.urls', namespace='products')),
     path('vendors/', include('apps.vendors.urls', namespace='vendors')),
     path('stocks/', include('apps.stocks.urls', namespace='stocks')),
+    # path('', include('', namespace='')),
     # path('', include('', namespace='')),
     
     

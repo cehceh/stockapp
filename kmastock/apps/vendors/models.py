@@ -21,6 +21,9 @@ class VendorQuerySet(models.query.QuerySet):
                 #   Q(tag__title__icontains=query)
                   )
         return self.filter(lookups).distinct()
+    
+    def vendor_already_exists(self, name):
+        return self.filter(name=name).exists()
 
 class VendorManager(models.Manager):
     def get_queryset(self):
@@ -53,10 +56,11 @@ class Vendor(models.Model):
     description = models.TextField(blank=True, null=True)
     # image       = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     timestamp   = models.DateTimeField(auto_now_add=True)
-    updated     = models.DateTimeField(auto_now_add=True)
+    updated     = models.DateTimeField(auto_now=True)
     active      = models.BooleanField(default=True)
     featured    = models.BooleanField(default=False)
     is_deleted  = models.BooleanField(default=False) # User Library
+    updateduser = models.ForeignKey('accounts.CustomUser', related_name='user_make_vendor_changes', blank=True, null=True, on_delete=models.CASCADE)
 
     objects = VendorManager()
 

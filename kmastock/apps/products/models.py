@@ -34,10 +34,13 @@ def upload_image_path(instance, filename):
 
 class ProductQuerySet(models.query.QuerySet):
     def active(self):
-        return self.filter(active=True)
+        return self.filter(active=True, is_deleted=False)
+    
+    def is_deleted(self):
+        return self.filter(active=False, is_deleted=True)
 
     def featured(self):
-        return self.filter(featured=True, active=True)
+        return self.filter(featured=True, active=True, is_deleted=False)
 
     def search(self, query):
         lookups = (Q(title__icontains=query) | 
@@ -45,8 +48,11 @@ class ProductQuerySet(models.query.QuerySet):
                   Q(price__icontains=query) |
                   Q(tag__title__icontains=query)
                   )
-        # tshirt, t-shirt, t shirt, red, green, blue,
         return self.filter(lookups).distinct()
+
+    def product_already_exists(self, name):
+        return self.filter(name=name).exists()
+
 
 class ProductManager(models.Manager):
     def get_queryset(self):
@@ -67,36 +73,41 @@ class ProductManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
+    def product_already_exists(self, name):
+        return self.get_queryset().product_already_exists(name=name)
 
 class Product(models.Model):
-    user            = models.ForeignKey('accounts.CustomUser', blank=True, null=True, on_delete=models.CASCADE)
-    vendor          = models.ForeignKey(Vendor, blank=True, null=True, on_delete=models.CASCADE)
-    category        = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE)
-    stock           = models.ForeignKey(Stock, blank=True, null=True, on_delete=models.CASCADE)
-    title           = models.CharField(max_length=120)
+    user        = models.ForeignKey('accounts.CustomUser', blank=True, null=True, on_delete=models.CASCADE)
+    vendor      = models.ForeignKey(Vendor, blank=True, null=True, on_delete=models.CASCADE)
+    category    = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE)
+    stock       = models.ForeignKey(Stock, blank=True, null=True, on_delete=models.CASCADE)
+    name        = models.CharField(default="", max_length=120)
+    barcode     = models.CharField(max_length=120, blank=True, null=True, unique=True)
     # slug            = models.SlugField(blank=True, unique=True)
-    description     = models.TextField(blank=True, null=True)
-    price           = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
-    image           = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
-    featured        = models.BooleanField(default=False)
-    active          = models.BooleanField(default=True)
-    timestamp       = models.DateTimeField(auto_now_add=True)
-    updated         = models.DateTimeField(auto_now_add=True)
-    is_deleted      = models.BooleanField(default=False) # User Library
+    originprice = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
+    price       = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
+    image       = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
+    timestamp   = models.DateTimeField(auto_now_add=True)
+    updated     = models.DateTimeField(auto_now=True)
+    featured    = models.BooleanField(default=False)
+    active      = models.BooleanField(default=True)
+    is_deleted  = models.BooleanField(default=False) 
+    updateduser = models.ForeignKey('accounts.CustomUser', related_name='user_make_product_changes', blank=True, null=True, on_delete=models.CASCADE)
+    
 
     objects = ProductManager()
 
-    def get_absolute_url(self):
-        #return "/products/{slug}/".format(slug=self.slug)
-        return reverse("products:detail", kwargs={"id": self.id})
-
+    # def get_absolute_url(self):
+    #     #return "/products/{slug}/".format(slug=self.slug)
+    #     return reverse("products:detail", kwargs={"id": self.id})
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return '{}'.format(self.name)
 
     @property
-    def name(self):
-        return self.title
+    def title(self):
+        return self.name
 
     def get_downloads(self):
         qs = self.productfile_set.all()

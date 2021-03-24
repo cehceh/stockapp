@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 16:35+0200\n"
+"POT-Creation-Date: 2021-03-21 18:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,98 +19,216 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: .\kmastock\settings\development.py:215
+#: .\stockapp\kmastock\kmastock\settings\development.py:212
 msgid "Arabic"
 msgstr "ar"
 
-#: .\kmastock\settings\development.py:216
+#: .\stockapp\kmastock\kmastock\settings\development.py:213
 msgid "English"
 msgstr "en"
 
-#: .\kmastock\settings\development.py:217
+#: .\stockapp\kmastock\kmastock\settings\development.py:214
 msgid "German"
 msgstr "de"
 
-#: .\kmastock\urls.py:37
+#: .\stockapp\kmastock\kmastock\urls.py:38
 msgid "admin/"
 msgstr ""
 
-#: .\templates\account\logout.html:5 .\templates\base\navbar.html:42
+#: .\stockapp\kmastock\templates\account\logout.html:5
+#: .\stockapp\kmastock\templates\base\navbar.html:42
+#: .\stockapp\kmastock\templates\base\navbar.html:112
+#: .\stockapp\kmastock\templates\base\sidebar.html:35
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:54
+#: .\stockapp\kmastock\templates\index07.html:41
+#: .\stockapp\kmastock\templates\index07.html:203
 msgid "Log out"
 msgstr "تسجيل الخروج"
 
-#: .\templates\account\logout.html:9 .\templates\account\logout.html:16
+#: .\stockapp\kmastock\templates\account\logout.html:9
+#: .\stockapp\kmastock\templates\account\logout.html:16
 msgid "Sign Out"
 msgstr "تسجيل الخروج"
 
-#: .\templates\account\logout.html:11
+#: .\stockapp\kmastock\templates\account\logout.html:11
 msgid "Are you sure you want to sign out?"
 msgstr "هل تريد تسجيل الخروج؟"
 
-#: .\templates\base\navbar.html:14
+#: .\stockapp\kmastock\templates\base\navbar.html:20
+msgid "Home"
+msgstr "لوحة التحكم"
+
+#: .\stockapp\kmastock\templates\base\navbar.html:24
+msgid "Sales"
+msgstr "المبيعات"
+
+#: .\stockapp\kmastock\templates\base\navbar.html:28
+msgid "Returns"
+msgstr "المرتجعات"
+
+#: .\stockapp\kmastock\templates\base\navbar.html:48
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: .\stockapp\kmastock\templates\base\navbar.html:53
+msgid "Register"
+msgstr "ان شاء حساب جديد"
+
+#: .\stockapp\kmastock\templates\base\navbar.html:72
+#: .\stockapp\kmastock\templates\base\sidebar.html:18
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:15
 msgid "Dashboard"
 msgstr "لوحة التحكم "
 
-#: .\templates\base\navbar.html:17
+#: .\stockapp\kmastock\templates\base\navbar.html:75
 msgid "Add New Product"
 msgstr "أضف منتج جديد"
 
-#: .\templates\base\navbar.html:21
+#: .\stockapp\kmastock\templates\base\navbar.html:79
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:33
 msgid "Active Products"
 msgstr "المنتحات المتاحة"
 
-#: .\templates\base\navbar.html:25
+#: .\stockapp\kmastock\templates\base\navbar.html:83
+#: .\stockapp\kmastock\templates\base\sidebar.html:60
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:37
 msgid "Out Of Stock"
 msgstr "النواقص"
 
-#: .\templates\base\navbar.html:29
-msgid "Your Created Products"
-msgstr "المنتحات المضافة"
+#: .\stockapp\kmastock\templates\base\navbar.html:87
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:19
+msgid "Stock"
+msgstr ""
 
-#: .\templates\base\navbar.html:35
+#: .\stockapp\kmastock\templates\base\navbar.html:90
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:22
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:29
+msgid "Add New Stock"
+msgstr "أضف منتج جديد"
+
+#: .\stockapp\kmastock\templates\base\navbar.html:93
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:25
+msgid "Edit Stock"
+msgstr ""
+
+#: .\stockapp\kmastock\templates\base\navbar.html:98
+msgid "Tools"
+msgstr ""
+
+#: .\stockapp\kmastock\templates\base\navbar.html:105
+#: .\stockapp\kmastock\templates\base\sidebar.html:13
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:47
+#: .\stockapp\kmastock\templates\index07.html:28
+#: .\stockapp\kmastock\templates\index07.html:196
 msgid "Wellcome"
 msgstr "مرحبا"
 
-#: .\templates\base\navbar.html:39
+#: .\stockapp\kmastock\templates\base\navbar.html:109
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:51
+#: .\stockapp\kmastock\templates\index07.html:200
 msgid "Change password"
 msgstr "تغيير كلمة المرور"
 
-#: .\templates\base\navbar.html:52
+#: .\stockapp\kmastock\templates\base\navbar.html:119
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:60
 msgid "Log in"
 msgstr "الدخول"
 
-#: .\templates\base\navbar.html:53 .\templates\home\frontpage.html:19
+#: .\stockapp\kmastock\templates\base\navbar.html:120
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:61
+#: .\stockapp\kmastock\templates\home\frontpage.html:19
 msgid "Sign up"
 msgstr " انشاء حساب جديد "
 
-#: .\templates\base\navbar.html:63
+#: .\stockapp\kmastock\templates\base\navbar.html:130
+#: .\stockapp\kmastock\templates\base\sidebar.html:95
+#: .\stockapp\kmastock\templates\index07.html:111
+#: .\stockapp\kmastock\templates\index07.html:210
 msgid "Choose Language"
 msgstr "اختر لغة"
 
-#: .\templates\base\search_bar.html:13
+#: .\stockapp\kmastock\templates\base\search_bar.html:13
 msgid "find product by id"
 msgstr "البحث عن المنتج برقمه"
 
-#: .\templates\base\search_bar.html:14
+#: .\stockapp\kmastock\templates\base\search_bar.html:14
 msgid "find product by barcode"
 msgstr "البحث عن المنتج بالباركود"
 
-#: .\templates\home\frontpage.html:10
+#: .\stockapp\kmastock\templates\base\sidebar.html:24
+#: .\stockapp\kmastock\templates\index07.html:33
+#, fuzzy
+#| msgid "Your Created Products"
+msgid "Created Products"
+msgstr "المنتحات المضافة"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:29
+#: .\stockapp\kmastock\templates\index07.html:36
+msgid "Created Stock"
+msgstr ""
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:46
+msgid "Products"
+msgstr "المنتحات"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:51
+msgid "Add Product"
+msgstr "أضف منتج جديد"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:55
+#, fuzzy
+#| msgid "Add New Product"
+msgid "Edit Product"
+msgstr "تعديل المنتج"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:66
+msgid "Stores"
+msgstr "المخازن"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:71
+msgid "Add New Store"
+msgstr "أضف مخزن جديد"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:76
+msgid "Edit Store"
+msgstr "تعديل مجزن"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:83
+msgid "Services"
+msgstr ""
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:88
+msgid "Contacts"
+msgstr "تواصل معنا"
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:114
+msgid "All rights reserved,"
+msgstr " جميع الحقوق محفوظة ..."
+
+#: .\stockapp\kmastock\templates\base\sidebar.html:115
+msgid "This software is made with by Eng. Amr Aly"
+msgstr "فام بتصميمه  م. عمرو على "
+
+#: .\stockapp\kmastock\templates\base\tools_navbar.html:41
+msgid "Your Created Products"
+msgstr "المنتحات المضافة"
+
+#: .\stockapp\kmastock\templates\home\frontpage.html:10
 msgid "Wellcome To Our Store Application"
 msgstr "أهلا بك فى متجرنا"
 
-#: .\templates\home\frontpage.html:13
+#: .\stockapp\kmastock\templates\home\frontpage.html:13
 msgid "We are happy to be with us"
 msgstr "سعداء بوجودك معنا هنا"
 
-#: .\templates\home\frontpage.html:14
+#: .\stockapp\kmastock\templates\home\frontpage.html:14
 msgid "Goto Your Dashboard"
 msgstr "أذهب الى لوحة التحكم الخاصة بك يا "
 
-#: .\templates\home\frontpage.html:18
+#: .\stockapp\kmastock\templates\home\frontpage.html:18
 msgid "We will be happy if you join Our Store, Try to"
 msgstr "سنكون سعداء لو التحقت بنا جرب  "
 
-#: .\templates\home\frontpage.html:19
+#: .\stockapp\kmastock\templates\home\frontpage.html:19
 msgid "now"
 msgstr "الان"
