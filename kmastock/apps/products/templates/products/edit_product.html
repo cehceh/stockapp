@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %} 
 {% load i18n %}
+{% load widget_tweaks %}
 <!-- {% load render_table from django_tables2 %} -->
 
 {% block content %}
@@ -9,7 +10,7 @@
 <div class="container">
     <h1 class="title">Edit Product</h1>
     
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- {{ form | crispy }} -->
         <!-- <div class="field">
@@ -33,7 +34,7 @@
         <div class="field">
             <label class="label">{{ form.stock.label_tag }}</label>
             <div class="control">
-                {{ form.stock }}
+                {% render_field form.stock %}
             </div>
         </div>
         <div class="field">
@@ -89,7 +90,9 @@
 
         <div class="field">
             <div class="control">
-                <button type="submit" class="button is-primary">Submit</button>
+                <button type="submit" class="button is-primary">
+                    Save Changes
+                </button>
             </div>
         </div>
 
@@ -101,4 +104,4 @@
 
 {% block scripts %}
     
-{% endblock  %}
+{% endblock %}

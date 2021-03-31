@@ -9,9 +9,8 @@ from django.utils.text import slugify
 
 
 def get_last_month_data(today):
-    '''
-    Simple method to get the datetime objects for the 
-    start and end of last month. 
+    ''' Simple method to get the datetime objects for the 
+        start and end of last month. 
     '''
     this_month_start = datetime.datetime(today.year, today.month, 1)
     last_month_end = this_month_start - datetime.timedelta(days=1)

@@ -36,7 +36,7 @@ def add_product(request):
 def edit_product(request, product_id):
     qs = Product.objects.get_product_by_id(id=product_id) # get the product name
     # print(qs)
-    form = ProductForm(request.POST or None, instance=qs)
+    form = ProductForm(request.POST or None, request.FILES or None, instance=qs)
     if form.is_valid():
         save_form = form.save()
         save_form.updateduser = request.user

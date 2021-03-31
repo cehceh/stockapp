@@ -60,7 +60,23 @@ class ProductForm(forms.ModelForm):
         fields = ('vendor', 'category', 'stock', 'name', 'barcode',
                 'originprice', 'price', 'image', 'description',
                 'active', 'is_deleted',)
-
+        widgets = {
+            'vendor': forms.Select(
+                attrs={
+                    'required':'true'
+                }
+            ),
+            'category': forms.Select(
+                attrs={
+                    'required':'true'
+                }
+            ),
+            'stock': forms.Select(
+                attrs={
+                    'required':'true'
+                }
+            )
+        }
     # init function is importanat in saving user automatically in create() function
     def __init__(self, *args, **kwargs):
         # self.user = user

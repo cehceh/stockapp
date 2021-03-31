@@ -5,6 +5,7 @@ from kmastock.utils import unique_slug_generator, get_filename
 from django.db.models import Q
 from django.db.models.signals import pre_save, post_save
 from django.urls import reverse
+from django.shortcuts import redirect
 
 from apps.vendors.models import Vendor
 from apps.stocks.models import Stock
@@ -22,15 +23,13 @@ def get_filename_ext(filepath):
 
 
 def upload_image_path(instance, filename):
-    # print(instance)
-    #print(filename)
     new_filename = random.randint(1,3910209312)
     name, ext = get_filename_ext(filename)
     final_filename = '{new_filename}{ext}'.format(new_filename=new_filename, ext=ext)
     return "products/{new_filename}/{final_filename}".format(
             new_filename=new_filename, 
-            final_filename=final_filename
-            )
+            final_filename=final_filename)
+    
 
 class ProductQuerySet(models.query.QuerySet):
     def active(self):
@@ -78,15 +77,15 @@ class ProductManager(models.Manager):
 
 class Product(models.Model):
     user        = models.ForeignKey('accounts.CustomUser', blank=True, null=True, on_delete=models.CASCADE)
-    vendor      = models.ForeignKey(Vendor, blank=True, null=True, on_delete=models.CASCADE)
-    category    = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE)
-    stock       = models.ForeignKey(Stock, blank=True, null=True, on_delete=models.CASCADE)
+    vendor      = models.ForeignKey(Vendor, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Vendor Name')
+    category    = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Category Name')
+    stock       = models.ForeignKey(Stock, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Store Name')
     name        = models.CharField(default="", max_length=120)
     barcode     = models.CharField(max_length=120, blank=True, null=True, unique=True)
     # slug            = models.SlugField(blank=True, unique=True)
     originprice = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
     price       = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
-    image       = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
+    image       = models.ImageField(upload_to="products", null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     timestamp   = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
@@ -98,9 +97,8 @@ class Product(models.Model):
 
     objects = ProductManager()
 
-    # def get_absolute_url(self):
-    #     #return "/products/{slug}/".format(slug=self.slug)
-    #     return reverse("products:detail", kwargs={"id": self.id})
+    def product_edit_url(self):
+        return reverse("products:edit_product", kwargs={"id": self.id})
 
     def __str__(self):
         return '{}'.format(self.name)
