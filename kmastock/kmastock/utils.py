@@ -2,6 +2,10 @@ import datetime
 import os
 import random
 import string
+from django.contrib.auth.decorators import permission_required
+# from django.contrib.admin.views.decorators import staff_member_required
+
+from django.core.exceptions import PermissionDenied
 
 from django.utils import timezone
 from django.utils.text import slugify
@@ -113,3 +117,39 @@ def unique_slug_generator(instance, new_slug=None):
                 )
         return unique_slug_generator(instance, new_slug=new_slug)
     return slug
+
+
+
+def auth_required(function):
+    def wrap(request, *args, **kwargs):
+        # joins elements of getnode() after each 2 digits. 
+        # using regex expression 
+        label = os.environ.get('SERIAL')
+        # print (label) 
+        mac = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
+        # print (mac) 
+        if mac == label:
+            # messages.success(request, 'you are authorized')
+            return function(request, *args, **kwargs)
+        else:
+            # messages.success(request, 'you are not authorized')
+            raise PermissionDenied
+
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+# Check if client or auth_user login
+def auth_user_required(function):
+    def wrap(request, *args, **kwargs):
+        user = request.user 
+        if user.is_staff:
+            # messages.success(request, 'you are authorized')
+            return function(request, *args, **kwargs)
+        else:
+            # messages.success(request, 'you are not authorized')
+            raise PermissionDenied
+
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap 

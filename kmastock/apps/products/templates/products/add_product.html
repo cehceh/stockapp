@@ -22,34 +22,53 @@
         <div class="field">
             <label class="label">{{ form.vendor.label_tag }}</label>
             <div class="control">
-                {% render_field form.vendor ::value="this.vendor" %}
+                {% render_field form.vendor v-model="vendor" ::value="this.vendor" %}
             </div>
         </div>
         <div class="field">
             <label class="label">{{ form.category.label_tag }}</label>
             <div class="control">
-                {% render_field form.category %} 
+                {% render_field form.category v-model="cat" %} 
                 <!-- required='true' -->
             </div>
         </div>
         <div class="field">
             <label class="label">{{ form.stock.label_tag }}</label>
             <div class="control">
-                {{ form.stock }}
+                {% render_field form.stock v-model="st" %}
             </div>
         </div>
         <div class="field">
             <label class="label">{{ form.name.label_tag }}</label>
             <div class="control">
-                {{ form.name }}
+                {% render_field form.name %}
             </div>
         </div>
         <div class="field">
-            <label class="label">{{ form.barcode.label_tag }}</label>
+            <label class="label">{{ form.quantity.label_tag }}</label>
             <div class="control">
-                {{ form.barcode }}
+                {% render_field form.quantity %}
             </div>
         </div>
+        <div class="field">
+            <label class="label">{{ form.barcode.label_tag.hidden }}</label>
+            <div class="control">
+                {% render_field form.barcode ::value="barcodeChanged" readonly='true' hidden='true' %}
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">{{ form.barurl.label_tag.hidden }}</label>
+            <div class="control">
+                {% render_field form.barurl ::value="urlChanged" readonly='true' hidden='true' %}
+            </div>
+        </div>
+        <!-- <div class="field">
+            <label class="label">{{ form.barimg.label_tag }}</label>
+            <div class="control">
+                {{ form.barimg }}
+            </div>
+        </div> -->
+
         <div class="field">
             <label class="label">{{ form.originprice.label_tag }}</label>
             <div class="control">
@@ -66,6 +85,7 @@
             <label class="label">{{ form.image.label_tag }}</label>
             <div class="control">
                 {{ form.image }}
+                <!-- <img class="image" src="{{ product.image.url }}"> -->
             </div>
         </div>
         
@@ -107,8 +127,26 @@
             el:'#add-product',
             delimiters:['[[', ']]'],
             data:{
+                id:'{{ lastid }}',
+                name:'{{ name }}',
                 vendor:'',
+                st:'',
+                cat:'',
+                url:'http://192.168.1.120:8010/products/details/by/barcode/',
+                barcode:'',
+                sign:'_',
+            },
+            computed:{
+                barcodeChanged(){
+                    this.barurl = this.id + '_' + 'vn' + '_' + this.vendor + '_' + 'ca' + '_' + this.cat + '_' + 'st' + '_' + this.st;
+                    return this.barurl;
+                },
+                urlChanged(){
+                    this.barurl = this.url + this.id + this.sign + 'vn' + '_' + this.vendor + this.sign + 'ca' + '_' + this.cat + this.sign + 'st' + '_' + this.st;
+                    return this.barurl;
+                },
             }
+            
         })
     </script>
 {% endblock  %}

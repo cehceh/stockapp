@@ -3,32 +3,65 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import ProductForm
 from .models import Product
+
+import os
+import pyqrcode
+from pyzbar.pyzbar import decode
+from PIL import Image
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
+@staff_member_required
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST or None, request.FILES or None)
         if form.is_valid():
-            save_form = form.save(commit=False)
-            save_form.user = request.user
-            save_form.updateduser = request.user
-            save_form.name = request.POST.get('name')
-            # save_form.description = request.POST.get('description')
-            match = Product.objects.product_already_exists(save_form.name)
-            if match:
-                messages.success(request, 'Add product (' + str(save_form.name) + ') failed, It seems that product name already exists')
-                return redirect(reverse('products:add_product'))
-            else:
-                save_form.save()
-                name = save_form.name 
-                product_id = save_form.id
-                messages.success(request, 'Product (' + str(name) + ') created successfully')
-                return redirect(reverse('products:edit_product', args=(product_id,)))
+            barcode_value = request.POST.get('barurl')
+            if barcode_value == None or barcode_value == '':
+                messages.success(request, 'Create barcode without value is not valid')
+            elif barcode_value != None:
+                qr = pyqrcode.create(barcode_value)
+                name = request.POST.get('name')
+                img_name = '-'.join(name.split())
+                file_path = 'media_root/barcodes/' + str(img_name) + '.png'
+                print('file_path== '+str(file_path))
+                match = Product.objects.filter(name=name).exists()
+                if not os.path.exists(file_path) and not match:
+                    qr.png('media_root/barcodes/' + str(img_name) + '.png', scale=8)
+                    save_form = form.save(commit=False)
+                    save_form.barimg = 'barcodes/' + str(img_name) + '.png' 
+                    save_form.barurl = barcode_value
+                    save_form.user = request.user
+                    save_form.updateduser = request.user
+                    # save_form.name = request.POST.get('name')
+                    # match = Product.objects.product_already_exists(save_form.name)
+                    save_form.save()
+
+                    product_name = save_form.name 
+                    product_id = save_form.id
+                    messages.success(request, 'Product (' + str(product_name) + ') created successfully')
+                    return redirect(reverse('products:edit_product', args=(product_id,)))
+                else:
+                    messages.success(request, 'Barcode is already exists or product name is repeated')
+                    return redirect(reverse('products:add_product'))
     else:
         form = ProductForm()
 
+    lastid = Product.objects.values('id').last()
+    if lastid is not None:
+        last = lastid['id'] + 1
+    else:
+        last = 1
+     
+    pro_name = request.POST.get('name')
+    if pro_name is not None:
+        join_name = '-'.join(pro_name.split())
+    else:
+        join_name = 'NoName'
     context = {
         'form': form,
+        'lastid': last,
+        'name':join_name,
     }  
     return render(request, 'products/add_product.html', context)
 

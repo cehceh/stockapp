@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from kmastock.utils import auth_user_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .forms import StocksForm
 from .models import Stock
 
 # Create your views here.
-@login_required
+@auth_user_required
 def add_stock(request):
     if request.method == 'POST':
         form = StocksForm(request.POST or None)
@@ -33,7 +35,8 @@ def add_stock(request):
         
     return render(request, 'stocks/add_stock.html', context)
 
-@login_required
+# @staff_member_required
+@auth_user_required
 def edit_stock(request, stock_id):
     qs = Stock.objects.get_stock_by_id(id=stock_id) # get the stock name
     # print(qs)

@@ -10,7 +10,7 @@
 <div class="container">
     <h1 class="title">Edit Product</h1>
     
-    <form method="POST" enctype="multipart/form-data">
+    <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         <!-- {{ form | crispy }} -->
         <!-- <div class="field">
@@ -44,6 +44,12 @@
             </div>
         </div>
         <div class="field">
+            <label class="label">{{ form.quantity.label_tag }}</label>
+            <div class="control">
+                {% render_field form.quantity %}
+            </div>
+        </div>
+        <div class="field">
             <label class="label">{{ form.barcode.label_tag }}</label>
             <div class="control">
                 {{ form.barcode }}
@@ -66,6 +72,7 @@
             <div class="control">
                 {{ form.image }}
             </div>
+            <img class="image" src="{{ qs.image.url }}">
         </div>
         
         <div class="field">
@@ -97,6 +104,10 @@
         </div>
 
     </form>
+    
+</div>
+<div class="control">
+    <img class="image" src="{{ qs.image.url }}">
 </div>
 
 {% endblock %}

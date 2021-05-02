@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 from apps.home.views import (frontpage, dashboard, en_frontpage, 
                             ar_frontpage, de_frontpage, tools,
                             change_language, test_)
@@ -29,8 +32,8 @@ urlpatterns = [
     path('change_language', change_language, name='change_language'), # main page means english
     # path('', test_, name="test"),
 
-]
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Go to this site(https://samulinatri.com/blog/django-translation/)
 # the site explain it well
@@ -61,10 +64,13 @@ urlpatterns += i18n_patterns( # i18n_patterns important to handel languages
     path('stocks/', include('apps.stocks.urls', namespace='stocks')),
     # path('', include('', namespace='')),
     # path('', include('', namespace='')),
-    
-    
+    # path('', include('', namespace='')),
+    # path('', include('', namespace='')),
+    # path('', include('', namespace='')),
+    # path('', include('', namespace='')),
+        
     # from this site(https://samulinatri.com/blog/django-translation/)
     # put in the buttom  
     prefix_default_language=False
 
-)
+) 

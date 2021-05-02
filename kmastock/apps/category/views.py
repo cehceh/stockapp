@@ -3,8 +3,10 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import CategoryForm
 from .models import Categories
+from kmastock.utils import auth_user_required
 # Create your views here.
 
+@auth_user_required
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST or None)
@@ -32,7 +34,7 @@ def add_category(request):
     }  
     return render(request, 'category/add_category.html', context)
 
-# @login_required
+@auth_user_required
 def edit_category(request, category_id):
     qs = Categories.objects.get_category_by_id(id=category_id) # get the category name
     # print(qs)

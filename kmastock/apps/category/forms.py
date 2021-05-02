@@ -13,12 +13,12 @@ class CategoryForm(forms.ModelForm):
         (False,'Existed'),
         (True, 'Deleted'),
     )
-    name =  forms.CharField(required=True, label='Vendor Name',
+    name =  forms.CharField(required=True, label='Category Name',
                             widget=forms.TextInput(
                                 attrs={
                                     # 'class': 'form-control',
                                     # 'type': 'text',
-                                    'placeholder': 'Write the vendor name here ...',
+                                    'placeholder': 'Write the category name here ...',
                                 })
             )
 

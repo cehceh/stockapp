@@ -139,13 +139,6 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
-        # for postgresql database
-        # 'ENGINE': 'django.db.backends.postgresql',#config('DATABASE_ENGINE'),#
-        # 'NAME': 'kmadb',#config('DATABASE_NAME'),  # Name of the database itself
-        # 'USER': 'postgres',#config('DATABASE_USER'),
-        # 'PASSWORD':#config('DATABASE_PASSWORD'),
-        # 'HOST': 'localhost',#config('DATABASE_HOST'),
-        # 'PORT': '5432',#config('DATABASE_PORT'), #'5432',
         ################################################
         'ENGINE': os.environ.get('DATABASE_ENGINE'), #config('DATABASE_ENGINE'),
         'NAME': os.environ.get('KMADB'),#config('KMADB'),# Name of the database itself
@@ -196,11 +189,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(SITE_ROOT, 'static_root') #(BASE_DIR, '../static_root') 
-print('STATIC_ROOT= '+str(STATIC_ROOT))
+# print('STATIC_ROOT= '+str(STATIC_ROOT))
 STATICFILES_DIRS =[
     os.path.join(SITE_ROOT, 'static')##(BASE_DIR, '../static') # important to do '../static' instead of 'static'
 ]
-print('STATICFILES_DIRS= '+str(STATICFILES_DIRS))
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'media_root')
+
+# print('STATICFILES_DIRS= '+str(STATICFILES_DIRS))
 
 from django.utils.translation import gettext_lazy as _
 

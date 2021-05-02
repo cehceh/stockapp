@@ -15,6 +15,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
+            {% if user.is_authenticated and user.is_staff %}
                 <li class="nav-item active">
                     <a class="nav-link" href="#">
                         <span class="fa fa-home"></span> {% trans 'Home' %}</a>
@@ -27,25 +28,25 @@
                     <a class="nav-link" href="#"> 
                     <span class="fa fa-download"></span> {% trans 'Returns' %}</a>
                 </li>
-                {% get_current_language as CODE %}
-                {% if user.is_authenticated and user.is_superuser %}
+                {% if user.is_superuser %}
                     <li class="nav-item">  
+                    {% get_current_language as CODE %}
                     {% if CODE == 'en-us' %}   
                         <a class="nav-link" href="/admin" target="_blank"><i class="fa fa-address-book"></i>
                             Admin Panel</a>
-                        {% else %}
+                    {% else %}
                         <a class="nav-link" href="/{{CODE}}/admin" target="_blank"><i class="fa fa-address-book"></i>
                             Admin Panel</a>
                     {% endif %}
                     </li>
                 {% endif %}
-                {% if user.is_authenticated %}
+                    
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">
                     <span class="fa fa-sign-out-alt">
                     </span> {% trans 'Log out' %}</a>
                 </li>
-                {% else %}
+            {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_login' %}">
                     <span class="fa fa-sign-in-alt">
@@ -56,7 +57,20 @@
                     <span class="fa fa-registered">
                     </span> {% trans 'Register' %}</a>
                 </li>
+            {% endif %}
+                <!--  -->
+            <!-- {% get_current_language as CODE %}
+            {% if user.is_authenticated and user.is_superuser %}
+                <li class="nav-item">  
+                {% if CODE == 'en-us' %}   
+                    <a class="nav-link" href="/admin" target="_blank"><i class="fa fa-address-book"></i>
+                        Admin Panel</a>
+                {% else %}
+                    <a class="nav-link" href="/{{CODE}}/admin" target="_blank"><i class="fa fa-address-book"></i>
+                        Admin Panel</a>
                 {% endif %}
+                </li>
+            {% endif %} -->
             </ul>
         </div>
     </div>
