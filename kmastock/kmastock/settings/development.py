@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'apps.clients',
     'apps.clientsaccts',
     'apps.home',
+    'apps.inventory',
     'apps.products',
     'apps.returns',
     'apps.sales',
@@ -213,7 +214,7 @@ LANGUAGES = (
 )
 
 MULTILINGUAL_LANGUAGES = (
-    "en-us",
+    "en",
     "ar",
     'de',
 )

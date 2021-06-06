@@ -49,5 +49,6 @@ def edit_vendor(request, vendor_id):
         'form': form,
         'vendor_id':qs,
     }   
+    
     return render(request, 'vendors/edit_vendor.html', context)
 
