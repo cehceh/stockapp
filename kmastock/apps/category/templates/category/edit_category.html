@@ -32,13 +32,24 @@
                 {{ form.description }}
             </div>
         </div>
+        <!-- button to show and hide a div -->
         <div class="field">
+            <div class="control">
+            <a class="btn btn-outline-primary" v-if="!isHidden" @click="isHidden = !isHidden" href="#">
+                Hide Options
+            </a>
+            <a class="btn btn-outline-primary" v-else @click="isHidden = !isHidden" href="#">
+                Display Options
+            </a>
+            </div>
+        </div>
+        <div class="field" v-if="!isHidden">
             <label class="label">{{ form.active.label_tag }}</label>
             <div class="control">
                 {{ form.active }}
             </div>
         </div>
-        <div class="field">
+        <div class="field" v-if="!isHidden">
             <label class="label">{{ form.is_deleted.label_tag }}</label>
             <div class="control">
                 {{ form.is_deleted }}
@@ -48,10 +59,19 @@
 
         <div class="field">
             <div class="control">
-                <button type="submit" class="button is-primary">Submit</button>
+                <button type="submit" class="button is-info">Submit</button>
+                <a type="button" class="btn btn-outline-primary" href="{% url 'category:add_category' %}">
+                    Add New
+                </a>
             </div>
         </div>
-
+        <!-- <div class="field">
+            <div class="control">
+                <a type="button" class="button is-info" href="{% url 'category:add_category' %}">
+                    Add New
+                </a>
+            </div>
+        </div> -->
     </form>
 </div>
 
@@ -65,6 +85,7 @@
             delimiters: ['[[', ']]'],
             data: {
                 active: true,
+                isHidden: true,
 
             },
             computed: {

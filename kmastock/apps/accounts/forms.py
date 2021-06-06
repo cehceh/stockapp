@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
-
-User = get_user_model()
+from .models import UserProfile
+from datetime import date
+# User = get_user_model()
 
 # class LoginForm(forms.Form):
 #     """docstring for ."""
@@ -41,15 +42,46 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 
+
 class CustomUserCreationForm(UserCreationForm):
     
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        # fields = ('username', 'email')
+        fields = UserCreationForm.Meta.fields 
+
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        # fields = ('username', 'email')
+        fields = UserChangeForm.Meta.fields
 
+
+class UserProfileForm(forms.ModelForm):
+    birth_date = forms.DateField(
+            widget= forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'value': date.today(),
+                }
+            )
+    )
+    class Meta:
+        model  = UserProfile
+        fields = (
+            'address', 'birth_date', 
+            'age', 'city', 'photo',
+        ) #('__all__') #
+    # widgets = {
+    #     'birth_date': forms.DateInput(
+    #                 attrs={
+    #                     'type': 'date',
+    #                 }
+    #     )
+    # }
+    # 
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+    

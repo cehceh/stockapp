@@ -1,5 +1,5 @@
 import random
-import os
+import os, uuid
 from django.db import models
 from kmastock.utils import unique_slug_generator, get_filename
 from django.db.models import Q
@@ -43,10 +43,10 @@ class ProductQuerySet(models.query.QuerySet):
 
     def search(self, query):
         lookups = (Q(title__icontains=query) | 
-                  Q(description__icontains=query) |
-                  Q(price__icontains=query) |
-                  Q(tag__title__icontains=query)
-                  )
+                    Q(description__icontains=query) |
+                    Q(price__icontains=query) |
+                    Q(tag__title__icontains=query)
+                    )
         return self.filter(lookups).distinct()
 
     def product_already_exists(self, name):
@@ -85,7 +85,12 @@ class Product(models.Model):
     qsell       = models.CharField(default="0", max_length=20)
     qremain     = models.CharField(default="0", max_length=20)
     probarcode  = models.CharField(max_length=120, blank=True, null=True, unique=True)
-    barcode     = models.CharField(max_length=120, blank=True, null=True, unique=True)
+    # barcode     = models.CharField(max_length=120, blank=True, null=True, unique=True)
+    barcode     = models.UUIDField(
+                        primary_key=False,
+                        default=uuid.uuid4,
+                        unique=True) #editable=False,
+                        
     barurl      = models.CharField(max_length=200, blank=True, null=True)
     barimg      = models.ImageField(upload_to="barcodes", null=True, blank=True)
     originprice = models.DecimalField(decimal_places=2, max_digits=20, default=39.99, verbose_name='Origin Price')

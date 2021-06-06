@@ -157,8 +157,6 @@ msgstr "البحث عن المنتج بالباركود"
 
 #: .\stockapp\kmastock\templates\base\sidebar.html:24
 #: .\stockapp\kmastock\templates\index07.html:33
-#, fuzzy
-#| msgid "Your Created Products"
 msgid "Created Products"
 msgstr "المنتحات المضافة"
 
@@ -176,8 +174,6 @@ msgid "Add Product"
 msgstr "أضف منتج جديد"
 
 #: .\stockapp\kmastock\templates\base\sidebar.html:55
-#, fuzzy
-#| msgid "Add New Product"
 msgid "Edit Product"
 msgstr "تعديل المنتج"
 
@@ -195,7 +191,7 @@ msgstr "تعديل مجزن"
 
 #: .\stockapp\kmastock\templates\base\sidebar.html:83
 msgid "Services"
-msgstr ""
+msgstr "الخدمات"
 
 #: .\stockapp\kmastock\templates\base\sidebar.html:88
 msgid "Contacts"

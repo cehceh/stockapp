@@ -1,0 +1,53 @@
+altgraph==0.17
+appdirs==1.4.4
+beautifulsoup4 @ file:///D:/Django/projects/stock/wheels/beautifulsoup4-4.9.3-py3-none-any.whl
+bottle==0.12.19
+bottle-websocket @ file:///D:/Django/clinic_wheel/bottle_websocket-0.2.9-py3-none-any.whl
+certifi==2020.12.5
+cffi==1.14.4
+chardet==4.0.0
+cryptography @ file:///D:/Django/projects/stock/wheels/cryptography-3.4.3-cp36-abi3-win_amd64.whl
+defusedxml==0.6.0
+distlib==0.3.1
+Django @ file:///D:/Django/projects/stock/wheels/Django-2.2.13-py3-none-any.whl
+django-allauth==0.44.0
+django-bootstrap @ file:///D:/Django/projects/stock/wheels/django_bootstrap-0.2.4-py3-none-any.whl
+django-bootstrap4 @ file:///D:/Django/projects/stock/wheels/django_bootstrap4-2.2.0-py3-none-any.whl
+django-crispy-forms @ file:///D:/Django/projects/stock/wheels/django_crispy_forms-1.9.2-py3-none-any.whl
+django-jquery @ file:///D:/Django/projects/stock/wheels/django_jquery-3.1.0-py2.py3-none-any.whl
+django-phonenumber-field==5.0.0
+django-tables2 @ file:///D:/Django/projects/stock/wheels/django_tables2-2.3.1-py2.py3-none-any.whl
+django-widget-tweaks==1.4.8
+filelock==3.0.12
+future==0.18.2
+gevent==20.12.1
+gevent-websocket==0.10.1
+greenlet==1.0.0
+idna @ file:///D:/Django/projects/stock/wheels/idna-2.10-py2.py3-none-any.whl
+oauthlib @ file:///D:/Django/projects/stock/wheels/oauthlib-3.1.0-py2.py3-none-any.whl
+pefile==2019.4.18
+phonenumbers==8.12.18
+Pillow==8.1.0
+psycopg2==2.8.6
+pycparser==2.20
+pyinstaller==4.2
+pyinstaller-hooks-contrib==2021.1
+PyJWT @ file:///D:/Django/projects/stock/wheels/PyJWT-2.0.1-py3-none-any.whl
+pypng @ file:///D:/Django/projects/stock/wheels/pypng-0.0.20-py3-none-any.whl
+PyQRCode @ file:///D:/Django/projects/stock/wheels/PyQRCode-1.2.1-py3-none-any.whl
+python-decouple==3.4
+python3-openid @ file:///D:/Django/projects/stock/wheels/python3_openid-3.2.0-py3-none-any.whl
+pytz @ file:///D:/Django/projects/stock/wheels/pytz-2021.1-py2.py3-none-any.whl
+pywin32==300
+pywin32-ctypes==0.2.0
+pyzbar @ file:///D:/Django/projects/stock/wheels/pyzbar-0.1.8-py2.py3-none-win_amd64.whl
+requests==2.25.1
+requests-oauthlib @ file:///D:/Django/projects/stock/wheels/requests_oauthlib-1.3.0-py2.py3-none-any.whl
+six==1.15.0
+soupsieve==2.1
+sqlparse==0.4.1
+tablib @ file:///D:/Django/projects/stock/wheels/tablib-2.0.0-py3-none-any.whl
+urllib3 @ file:///D:/Django/projects/stock/wheels/urllib3-1.26.3-py2.py3-none-any.whl
+virtualenv==20.3.1
+zope.event==4.5.0
+zope.interface==5.2.0

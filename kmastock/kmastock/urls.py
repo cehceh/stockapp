@@ -18,8 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from apps.home.views import (frontpage, dashboard, en_frontpage, 
-                            ar_frontpage, de_frontpage, tools,
+from apps.home.views import (frontpage, dashboard, tools,
                             change_language, test_)
 
 from django.utils.translation import gettext_lazy as _
@@ -29,7 +28,7 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     # # frontpage 
     # path('', frontpage, name='frontpage'), # main page means english
-    path('change_language', change_language, name='change_language'), # main page means english
+    path('change_language/', change_language, name='change_language'), # main page means english
     # path('', test_, name="test"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -39,8 +38,10 @@ urlpatterns = [
 # the site explain it well
 urlpatterns += i18n_patterns( # i18n_patterns important to handel languages
     path(_('admin/'), admin.site.urls),
+    
     # for authentication
     path('accounts/', include('allauth.urls')),
+    path('accounts/', include('apps.accounts.urls', namespace='accounts')),
     
     # frontpage 
     path('', frontpage, name='frontpage'), # main page means english
@@ -49,11 +50,7 @@ urlpatterns += i18n_patterns( # i18n_patterns important to handel languages
     # Tools
     path('tools/', tools, name='tools'),
     
-    # arabic and german frontpage url
-    # path('english/', en_frontpage, name='en_frontpage'), # no need to it 
-    # path('arabic/', ar_frontpage, name='ar_frontpage'),
-    # path('german/', de_frontpage, name='de_frontpage'),
-     
+    
     # apps urls
     path('home/', include('apps.home.urls', namespace='home')),
     path('barcodes/', include('apps.barcodes.urls', namespace='barcodes')),

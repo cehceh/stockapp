@@ -14,24 +14,25 @@
             </a>
             <ul class="collapse list-unstyled" id="userSubmenu">
                 <li>
-                    <a href="/dashboard"><span class="fa fa-home"></span>
+                    <a href="/dashboard"><span class="fa fa-laptop"></span>
                     {% trans 'Dashboard' %}</a>
                 </li>
+
                 {% if user.is_staff %}
                 <li>
                     <a href="#">
                         <span class="fa fa-cubes"></span>
-                     {% trans 'Created Products' %}</a>
+                        {% trans 'Created Products' %}</a>
                 </li>
                 <li>
                     <a href="#"> 
                         <span class="fas fa-battery-full"></span>
-                         {% trans 'Created Stores' %}</a>
+                        {% trans 'Created Stores' %}</a>
                 </li>
                 <li>
                     <a href="#"> 
                         <span class="fas fa-user-plus"></span>
-                         {% trans 'Created Vendors' %}</a>
+                        {% trans 'Created Vendors' %}</a>
                 </li>
                 {% endif %}
                 <li>
@@ -80,7 +81,7 @@
                 <li>
                     <a href="#"><span class="fa fa-pencil-square-o">
                     </span>
-                     {% trans 'Edit Store' %} </a>
+                    {% trans 'Edit Store' %} </a>
                 </li>
             </ul>
         </li>
@@ -96,7 +97,7 @@
                 <li>
                     <a href="#"><span class="fa fa-pencil-square-o">
                     </span>
-                     {% trans 'Edit Vendor' %} </a>
+                    {% trans 'Edit Vendor' %} </a>
                 </li>
             </ul>
         </li>
@@ -112,7 +113,7 @@
                 <li>
                     <a href="#"><span class="fa fa-pencil-square-o">
                     </span>
-                     {% trans 'Edit Category' %} </a>
+                    {% trans 'Edit Category' %} </a>
                 </li>
             </ul>
         </li>
@@ -127,24 +128,24 @@
             <a href="#"><span class="fa fa-paper-plane">
             </span> {% trans 'Contacts' %}</a>
         </li>
-        {% if user.is_authenticated %}
-            <li>
-                <form action="{% url 'change_language' %}" method="post" id="lang">
-                    {% csrf_token %}
-                    <select name="language" class="form-control" form="lang" onchange="form.submit()" id="myDropdown">   
-                        <option selected value="">{% trans 'Choose Language' %}</option>       
-                        {% get_available_languages as LANGUAGES %}
-                        {% for language in LANGUAGES %}
-                        <option value="{{ language.0 }}" {% if language.0 == LANGUAGE_CODE %} selected {% endif %}>
-                            {{ language.0|language_name_local }} 
-                            ({{ language.0 }})
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <input type="hidden" value="Change">
-                </form>
-            </li>
-        {% endif %}
+        
+        <li>
+            <form action="{% url 'change_language' %}" method="post" id="lang">
+                {% csrf_token %}
+                <select name="language" class="form-control" form="lang" onchange="form.submit()" id="myDropdown">   
+                    <option selected value="">{% trans 'Choose Language' %}</option>       
+                    {% get_available_languages as LANGUAGES %}
+                    {% for language in LANGUAGES %}
+                    <option value="{{ language.0 }}" {% if language.0 == LANGUAGE_CODE %} selected {% endif %}>
+                        {{ language.0|language_name_local }} 
+                        ({{ language.0 }})
+                    </option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" value="Change">
+            </form>
+        </li>
+        
     </ul>
 
 <div class="footer" style="background-color: transparent;">

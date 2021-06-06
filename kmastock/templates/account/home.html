@@ -1,0 +1,19 @@
+
+
+
+
+
+{% for p in profile %}
+<a href="{% url 'users:user_profile' p.profile_uuid %}">Profile</a>
+{% endfor %}
+...
+
+# templates/account/profile.html
+
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>{{ user_profile.profile_uuid }}</h1>
+    <p>{{ user_profile.email }}</p>
+{% endblock content %}

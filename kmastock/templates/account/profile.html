@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+
+
+{% block content %}
+
+    <h4><p>Profile Page for User : {{ request.user.username }}</p></h4>
+    <!-- <h3><p> Unique ID: {{ profile.profile_uuid }}</p></h3> -->
+    <form method="POST">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input class="button is-info" type="submit" value="{{ btn }}">
+    </form>
+
+{% endblock content %}

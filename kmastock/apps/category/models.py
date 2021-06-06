@@ -15,10 +15,10 @@ class CategoriesQuerySet(models.query.QuerySet):
 
     def search(self, query):
         lookups = (Q(name__icontains=query) | 
-                  Q(description__icontains=query) 
+                    Q(description__icontains=query) 
                 #   Q(price__icontains=query) |
                 #   Q(tag__title__icontains=query)
-                  )
+                )
         return self.filter(lookups).distinct()
 
 class CategoriesManager(models.Manager):

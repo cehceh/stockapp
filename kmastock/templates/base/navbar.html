@@ -1,6 +1,5 @@
 {% load static %}
 {% load i18n %}
-<!-- {% load i18n %} -->
 
 <!-- new nav -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -15,19 +14,18 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-            {% if user.is_authenticated and user.is_staff %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        <span class="fa fa-home"></span> {% trans 'Home' %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <span class="fa fa-shopping-basket"></span> {% trans 'Sales' %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"> 
-                    <span class="fa fa-download"></span> {% trans 'Returns' %}</a>
-                </li>
+            {% if user.is_authenticated %}
+                    
+                {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                        <span class="fa fa-shopping-basket"></span> {% trans 'Sales' %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> 
+                        <span class="fa fa-download"></span> {% trans 'Returns' %}</a>
+                    </li>
+                {% endif %}
                 {% if user.is_superuser %}
                     <li class="nav-item">  
                     {% get_current_language as CODE %}
@@ -40,13 +38,29 @@
                     {% endif %}
                     </li>
                 {% endif %}
-                    
+                
+                {% if user.is_authenticated and match_user %}
+                    {% get_current_language as CODE %}
+                    <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'accounts:edit_user_profile' profile.user_id profile.profile_uuid %}">
+                        <i class="fa fa-laptop" aria-hidden="true"></i> 
+                        {% trans 'Edit your profile' %}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'accounts:add_user_profile' request.user.id %}">
+                            <i class="fa fa-laptop" aria-hidden="true"></i> 
+                            {% trans 'Add new profile' %}</a>
+                    </li>
+                {% endif %}
+                
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">
                     <span class="fa fa-sign-out-alt">
                     </span> {% trans 'Log out' %}</a>
                 </li>
-            {% else %}
+                
+            {% else %}                
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_login' %}">
                     <span class="fa fa-sign-in-alt">
@@ -80,7 +94,7 @@
 <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="/">KMASTORE </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         {% if user.is_authenticated %}
@@ -130,7 +144,7 @@
                         {% trans 'Log out' %}</a>
                     </div>
                 </li>
-               
+            
             </ul>
         {% else %}
             <form class="form-inline ml-auto">

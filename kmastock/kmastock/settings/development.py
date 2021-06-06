@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from decouple import config
+# from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -93,9 +93,8 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 # for django-allauth manage users login,signup and logout 
 AUTH_USER_MODEL = 'accounts.CustomUser' # new
 
-LOGIN_REDIRECT_URL = '/' # means frontpage
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
-
+LOGIN_REDIRECT_URL = 'frontpage' # means frontpage
+ACCOUNT_LOGOUT_REDIRECT_URL = 'frontpage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,6 +122,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'context_processors.extras',
             ],
         },
     },
@@ -202,22 +202,25 @@ MEDIA_ROOT = os.path.join(SITE_ROOT, 'media_root')
 from django.utils.translation import gettext_lazy as _
 
 LOCALE_PATHS = [
-   os.path.join(SITE_ROOT, 'locale'),
-   os.path.join(SITE_ROOT, "apps/home/locale"),
+    os.path.join(SITE_ROOT, 'locale'),
+    os.path.join(SITE_ROOT, "apps/home/locale"),
 ]
 #print(BASE_DIR,STATIC_URL,LOCALE_PATHS,STATIC_ROOT,os.path.join(SITE_ROOT, "templates"))
 LANGUAGES = (
-    ('ar', _('Arabic')),
     ('en', _('English')),
+    ('ar', _('Arabic')),
     ('de', _('German')),
 )
 
 MULTILINGUAL_LANGUAGES = (
-    "en",
+    "en-us",
     "ar",
     'de',
 )
 
+
+
+# print(MULTILINGUAL_LANGUAGES[2])
 print('DJANGO_ROOT= '+str(DJANGO_ROOT))
 print('SITE_ROOT= '+str(SITE_ROOT))
 print('SITE_NAME= '+str(SITE_NAME))
@@ -242,3 +245,4 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True # False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'#'email'
 ACCOUNT_UNIQUE_EMAIL = True
+

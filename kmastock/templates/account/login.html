@@ -1,19 +1,80 @@
-{% extends 'base.html' %} {% load crispy_forms_tags %}
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+{% load i18n %}
 
+{% url 'account_login' as login %}
+
+{{ LANGUAGE_CODE  }}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language as CODE %}
+{{ LANGUAGES  }}
+{{ CODE }}
 
 {% block content %}
-    
-<div class="container">
-    <h1 class="title">Log in</h1>
-    
-    <form method="post">
-        {% csrf_token %}
 
-        {{ form | crispy }}
+    <div class="container">
+        <h1 class="title">Log in </h1>
+        
+        <form method="post">
+            {% csrf_token %}
 
-        <button class="button is-primary" type="submit">Log in</button>
-    </form>
-   
-</div>
+            {{ form | crispy }}
+
+            <button class="button is-primary" type="submit">
+                Log in </button>
+        </form>  
+    </div>
+
+    <!-- {% if request.path == '/en/accounts/login/' or request.path == '/accounts/login/' %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_current_language as CODE %}
+
+        <div class="container">
+            <h1 class="title">Log in </h1>
+            
+            <form method="post">
+                {% csrf_token %}
+        
+                {{ form | crispy }}
+        
+                <button class="button is-primary" type="submit">
+                    Log in</button>
+            </form>  
+        </div>
+
+    {% elif request.path == '/ar/accounts/login/' %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_current_language as CODE %}
+        <div class="container">
+            <h1 class="title">Log in </h1>
+            
+            <form method="post">
+                {% csrf_token %}
+        
+                {{ form | crispy }}
+        
+                <button class="button is-primary" type="submit">
+                    Log in</button>
+            </form>
+        
+        </div>
+
+    {% elif request.path == '/de/accounts/login/' %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_current_language as CODE %}
+        <div class="container">
+            <h1 class="title">Log in </h1>
+            
+            <form method="post">
+                {% csrf_token %}
+
+                {{ form | crispy }}
+
+                <button class="button is-primary" type="submit">
+                    Log in </button>
+            </form>
+        
+        </div>
+    {% endif %} -->
 
 {% endblock  %}

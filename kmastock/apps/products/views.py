@@ -15,6 +15,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST or None, request.FILES or None)
+        # uuid = None
         if form.is_valid():
             barcode_value = request.POST.get('barurl')
             if barcode_value == None or barcode_value == '':
@@ -26,6 +27,7 @@ def add_product(request):
                 file_path = 'media_root/barcodes/' + str(img_name) + '.png'
                 print('file_path== '+str(file_path))
                 match = Product.objects.filter(name=name).exists()
+                uuid = None #  request.POST.get('barcode')
                 if not os.path.exists(file_path) and not match:
                     qr.png('media_root/barcodes/' + str(img_name) + '.png', scale=8)
                     save_form = form.save(commit=False)
@@ -37,6 +39,7 @@ def add_product(request):
                     # match = Product.objects.product_already_exists(save_form.name)
                     save_form.save()
 
+                    uuid = save_form.barcode
                     product_name = save_form.name 
                     product_id = save_form.id
                     messages.success(request, 'Product (' + str(product_name) + ') created successfully')
@@ -52,7 +55,7 @@ def add_product(request):
         last = lastid['id'] + 1
     else:
         last = 1
-     
+    
     pro_name = request.POST.get('name')
     if pro_name is not None:
         join_name = '-'.join(pro_name.split())
@@ -62,6 +65,7 @@ def add_product(request):
         'form': form,
         'lastid': last,
         'name':join_name,
+        # 'uuid': uuid,
     }  
     return render(request, 'products/add_product.html', context)
 

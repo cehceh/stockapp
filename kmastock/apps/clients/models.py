@@ -29,7 +29,7 @@ class ClientManager(models.Manager):
     # def featured(self): #Vendor.objects.featured() 
     #     return self.get_queryset().featured()
 
-    def get_vendor_by_id(self, id):
+    def get_client_by_id(self, id):
         qs = self.get_queryset().filter(id=id) # Product.objects == self.get_queryset()
         if qs.count() == 1:
             return qs.first()

@@ -53,16 +53,18 @@
         <div class="field">
             <label class="label">{{ form.barcode.label_tag.hidden }}</label>
             <div class="control">
-                {% render_field form.barcode ::value="barcodeChanged" readonly='true' hidden='true' %}
+                {% render_field form.barcode ::value="barcode" readonly='true' %}
             </div>
         </div>
+        <!-- ::value="barcodeChanged" -->
         <div class="field">
             <label class="label">{{ form.barurl.label_tag.hidden }}</label>
             <div class="control">
-                {% render_field form.barurl ::value="urlChanged" readonly='true' hidden='true' %}
+                {% render_field form.barurl ::value="urlChanged" readonly='true' %}
             </div>
         </div>
-        <!-- <div class="field">
+        <!-- hidden='true' -->
+        <!-- <div class="field"> 
             <label class="label">{{ form.barimg.label_tag }}</label>
             <div class="control">
                 {{ form.barimg }}
@@ -133,16 +135,17 @@
                 st:'',
                 cat:'',
                 url:'http://192.168.1.120:8010/products/details/by/barcode/',
-                barcode:'',
+                barcode:'{{ form.barcode.value }}',
                 sign:'_',
             },
             computed:{
                 barcodeChanged(){
-                    this.barurl = this.id + '_' + 'vn' + '_' + this.vendor + '_' + 'ca' + '_' + this.cat + '_' + 'st' + '_' + this.st;
-                    return this.barurl;
+                    // this.barurl = this.id + '_' + 'vn' + '_' + this.vendor + '_' + 'ca' + '_' + this.cat + '_' + 'st' + '_' + this.st;
+                    // return this.barurl;
                 },
                 urlChanged(){
-                    this.barurl = this.url + this.id + this.sign + 'vn' + '_' + this.vendor + this.sign + 'ca' + '_' + this.cat + this.sign + 'st' + '_' + this.st;
+                    this.barurl = this.url + this.barcode;
+                    // this.url + this.id + this.sign + 'vn' + '_' + this.vendor + this.sign + 'ca' + '_' + this.cat + this.sign + 'st' + '_' + this.st;
                     return this.barurl;
                 },
             }

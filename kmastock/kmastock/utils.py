@@ -7,9 +7,11 @@ from django.contrib.auth.decorators import permission_required
 
 from django.core.exceptions import PermissionDenied
 
+from django.contrib import messages
 from django.utils import timezone
 from django.utils.text import slugify
-
+from django.urls import reverse
+from django.shortcuts import redirect
 
 
 def get_last_month_data(today):
@@ -95,9 +97,6 @@ def unique_order_id_generator(instance):
     return order_new_id
 
 
-
-
-
 def unique_slug_generator(instance, new_slug=None):
     """
     This is for a Django project and it assumes your instance 
@@ -153,3 +152,61 @@ def auth_user_required(function):
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap 
+
+# Prevent user from changing the user id in this url(localhost:8000/accounts/profile/<user_id>/)
+def prevent_changing_user_id(function):
+    def wrap(request, *args, **kwargs):
+        from apps.accounts.views import edit_user_profile
+        from apps.accounts.models import UserProfile
+        
+        if request.LANGUAGE_CODE == 'en-us':
+            lang = 'en' # (request.LANGUAGE_CODE)
+        else:
+            lang = (request.LANGUAGE_CODE)
+        print(lang)
+        user = request.user 
+        user_id = request.user.id 
+        uuid = UserProfile.objects.get(user_id=user_id)
+        # match = UserProfile.objects.filter(user_id=user_id).exists()
+        url_path = '/'+ lang +'/accounts/profile/user/id/'+ str(user_id) +'/unique/id/'+ str(uuid.profile_uuid) +'/' 
+        print(request.path, url_path)
+        if user_id is not None:
+            if request.path != url_path:
+                print(url_path)
+                from django.http import HttpResponse, HttpResponseRedirect
+                return HttpResponseRedirect(url_path)
+                # messages.success(request, 'It is not allowed')
+                # raise PermissionDenied
+                # print(user_id)
+                # print(url_path)
+                # # messages.success(request, 'you are authorized')
+                # return function(request, *args, **kwargs)
+            else:
+                # print(user_id)
+                # print(url_path)
+                # messages.success(request, 'you are authorized')
+                return function(request, *args, **kwargs)
+                # messages.success(request, 'It is not allowed')
+                # return redirect(reverse('accounts:edit_user_profile', args=(user_id, uuid.profile_uuid)))
+                # raise PermissionDenied
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+
+# def changing_url_to_en(function):
+#     def wrap(request, *args, **kwargs):
+#         lang = (request.LANGUAGE_CODE)
+#         print(lang)
+#         if lang == 'en-us'
+#             lang = 'en'
+#             return function(request, *args, **kwargs)
+#         else:
+#             raise PermissionDenied
+
+#     wrap.__doc__ = function.__doc__
+#     wrap.__name__ = function.__name__
+#     return wrap
+
